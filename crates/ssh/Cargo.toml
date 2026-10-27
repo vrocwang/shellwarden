@@ -1,0 +1,23 @@
+[package]
+name = "shellwarden-ssh"
+description = "ShellWarden SSH 传输层：SshBackend 接口、主机密钥校验与 russh 后端"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+shellwarden-core = { path = "../core" }
+russh = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+base64 = { workspace = true }
+tracing = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
+rand = { version = "0.10", features = ["thread_rng"] }
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "net", "time", "sync"] }

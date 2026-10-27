@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shellwarden.local/schemas/policy-rule.v1.json",
+  "title": "ShellWarden PolicyRule v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rule_id", "match", "effect", "max_risk"],
+  "properties": {
+    "rule_id": { "type": "string", "minLength": 1 },
+    "profile_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "priority": { "type": "integer" },
+    "description": { "type": "string" },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool"],
+      "properties": {
+        "tool": { "type": "string", "minLength": 1 },
+        "host_tags_all": { "type": "array", "items": { "type": "string" } },
+        "host_tags_any": { "type": "array", "items": { "type": "string" } },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "args": { "type": "object" }
+      }
+    },
+    "cel": { "type": ["string", "null"] },
+    "effect": { "enum": ["allow", "deny", "require_approval", "require_strong_approval"] },
+    "approval": { "enum": ["none", "optional", "required", "strong"] },
+    "max_risk": { "enum": ["R0", "R1", "R2", "R3", "R4"] },
+    "reason": { "type": "string" }
+  }
+}

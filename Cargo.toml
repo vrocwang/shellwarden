@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+members = ["crates/core", "crates/store", "crates/ssh", "crates/model", "src-tauri"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["simon"]
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_jcs = "0.2"
+toml = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.10", features = ["v7", "serde"] }
+sha2 = "0.10"
+rusqlite = { version = "0.40", features = ["bundled"] }
+russh = { version = "0.64" }
+async-trait = "0.1"
+base64 = "0.22"
+tokio = { version = "1", features = ["rt-multi-thread", "sync", "time", "io-util", "macros"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tauri = { version = "2" }
+tauri-build = { version = "2" }
+nlsh = { git = "https://github.com/vrocwang/nlsh.git", rev = "00f3401806f41f11095fcd305650b322fc0f87c0" }
+
+[profile.dev]
+# Tauri 的默认 dev profile 偏慢；适度优化依赖，加快首次编译后的增量构建。
+debug = 1

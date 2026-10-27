@@ -1,0 +1,37 @@
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Rust / Cargo
+target/
+.cargo-home/
+.cargo/config.toml
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+.npm-cache/
+.devdata/
+
+# Tauri 生成的 ACL schema（构建产物）
+src-tauri/gen/
+
+# 本地数据/密钥备份（绝不入库）
+backups/
+
+# 本地交叉编译工具链与构建产物
+.toolchains/
+.xwin-cache/
+release/
+
+# 本地运行数据（便携模式或 SHELLWARDEN_DATA_DIR=. 可能落在仓库根）
+config.toml
+shellwarden.db
+shellwarden.db-wal
+shellwarden.db-shm
+secret.key
+known_hosts.json

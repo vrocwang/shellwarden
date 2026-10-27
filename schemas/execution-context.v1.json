@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shellwarden.local/schemas/execution-context.v1.json",
+  "title": "ShellWarden ExecutionContext v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["transport", "remote_user", "cwd", "shell", "env_profile", "path_mode", "path_value", "privilege_mode", "sudo_policy", "timeout_seconds", "output_limit_bytes", "network_scope", "source"],
+  "properties": {
+    "context_id": { "type": "string" },
+    "host_id": { "type": "string" },
+    "identity_id": { "type": "string" },
+    "transport": { "enum": ["exec_channel", "pty"] },
+    "remote_user": { "type": "string", "minLength": 1 },
+    "cwd": { "type": "string", "pattern": "^/" },
+    "shell": { "type": "string" },
+    "env_profile": { "type": "string" },
+    "env_allowlist": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "path_mode": { "enum": ["fixed", "inherit"] },
+    "path_value": { "type": "string" },
+    "privilege_mode": { "enum": ["normal", "privileged"] },
+    "sudo_policy": { "enum": ["not_allowed", "preauthorized_readonly", "interactive_handoff"] },
+    "timeout_seconds": { "type": "integer", "minimum": 1 },
+    "output_limit_bytes": { "type": "integer", "minimum": 1 },
+    "path_scope": { "type": "array", "items": { "type": "string", "pattern": "^/" }, "uniqueItems": true },
+    "network_scope": { "enum": ["none", "loopback", "any"] },
+    "source": { "enum": ["plan_explicit", "user_selected"] }
+  }
+}

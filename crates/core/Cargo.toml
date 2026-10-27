@@ -1,0 +1,14 @@
+[package]
+name = "shellwarden-core"
+description = "ShellWarden 安全核心：计划校验、策略引擎、审批绑定、ExecutionContext、状态机与审计链"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_jcs = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+sha2 = { workspace = true }

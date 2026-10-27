@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shellwarden.local/schemas/tool.v2.json",
+  "title": "ShellWarden Tool declaration v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "version", "description", "read_only", "risk_floor", "output_mode", "platforms", "model_visible_fields"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "read_only": { "type": "boolean" },
+    "risk_floor": { "enum": ["R0", "R1", "R2", "R3", "R4"] },
+    "output_mode": { "enum": ["structured_only", "sample", "raw_on_demand"] },
+    "platforms": { "type": "array", "items": { "type": "string" } },
+    "model_visible_fields": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  }
+}

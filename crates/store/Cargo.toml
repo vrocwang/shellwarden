@@ -1,0 +1,17 @@
+[package]
+name = "shellwarden-store"
+description = "ShellWarden 本地存储：SQLite schema、迁移与仓储"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+shellwarden-core = { path = "../core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+rusqlite = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"

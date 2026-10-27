@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shellwarden.local/schemas/approval-binding.v1.json",
+  "title": "ShellWarden ApprovalBinding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approval_id", "task_id", "plan_id", "plan_version", "plan_digest", "schema_version", "policy_version", "policy_digest", "policy_digests", "tool_versions", "host_id", "identity_id", "execution_context_digest", "execution_scope", "preconditions", "risk_summary", "decision", "strength", "issued_at", "expires_at"],
+  "properties": {
+    "approval_id": { "type": "string", "pattern": "^appr_" },
+    "task_id": { "type": "string" },
+    "plan_id": { "type": "string" },
+    "plan_version": { "type": "integer", "minimum": 1 },
+    "plan_digest": { "type": "string", "pattern": "^sha256:" },
+    "schema_version": { "const": "2.0" },
+    "policy_version": { "type": "string" },
+    "policy_digest": { "type": "string", "pattern": "^sha256:" },
+    "policy_digests": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "pattern": "^sha256:" }
+    },
+    "tool_versions": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "host_id": { "type": "string" },
+    "identity_id": { "type": "string" },
+    "execution_context_digest": { "type": "string", "pattern": "^sha256:" },
+    "execution_scope": {
+      "type": "object",
+      "required": ["step_ids", "path_scope", "command_scope", "command_scope_semantics"],
+      "properties": {
+        "step_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "path_scope": { "type": "array", "items": { "type": "string" } },
+        "command_scope": { "type": "array", "items": { "type": "string" } },
+        "command_scope_semantics": { "enum": ["none", "allow_listed", "unrestricted"] }
+      }
+    },
+    "preconditions": { "type": "array" },
+    "risk_summary": {
+      "type": "object",
+      "required": ["max_risk", "computed_by", "decision_ids"],
+      "properties": {
+        "max_risk": { "enum": ["R0", "R1", "R2", "R3", "R4"] },
+        "computed_by": { "type": "string" },
+        "decision_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "decision": { "enum": ["pending", "approved", "rejected", "revoked"] },
+    "strength": { "enum": ["none", "optional", "required", "strong"] },
+    "decided_by": { "type": ["string", "null"] },
+    "decided_at": { "type": ["string", "null"] },
+    "reauth": { "type": ["object", "null"] },
+    "issued_at": { "type": "string" },
+    "expires_at": { "type": "string" }
+  }
+}
